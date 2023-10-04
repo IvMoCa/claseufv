@@ -1,0 +1,53 @@
+class Empleado:
+    def __init__(self, nombre, salario):
+        self.nombre = nombre
+        self.salario = salario
+
+    def __str__(self):
+        return f"Empleado: {self.nombre}, Salario: ${self.salario}"
+
+
+class Departamento:
+    def __init__(self, nombre, empleados=None):
+        self.nombre = nombre
+        self.empleados = empleados if empleados else []
+
+    def agregar_empleado(self, empleado):
+        self.empleados.append(empleado)
+
+    def __str__(self):
+        empleado_str = "\n".join(str(empleado) for empleado in self.empleados)
+        return f"Departamento: {self.nombre}\nEmpleados:\n{empleado_str}"
+
+
+class Main:
+    def __init__(self):
+        self.departamento = Departamento("Ventas")
+
+    def ejecutar(self):
+        while True:
+            print("1. Agregar empleado")
+            print("2. Mostrar departamento y empleados")
+            print("3. Salir")
+            opcion = input("Seleccione una opción: ")
+
+            if opcion == "1":
+                nombre = input("Nombre del empleado: ")
+                salario = float(input("Salario del empleado: "))
+                empleado = Empleado(nombre, salario)
+                self.departamento.agregar_empleado(empleado)
+                print("Empleado agregado con éxito.")
+
+            elif opcion == "2":
+                print(self.departamento)
+
+            elif opcion == "3":
+                break
+
+            else:
+                print("Opción no válida. Intente de nuevo.")
+
+
+if __name__ == "__main__":
+    main = Main()
+    main.ejecutar()
